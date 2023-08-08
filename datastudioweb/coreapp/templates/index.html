@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block body-block %}
+  {% include 'widgets/cards.html' %} 
+  {% if deals %}
+    <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card ">
+            <div class="card-header pb-0 p-3">
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-2">Flips</h6>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Flip Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Earnings</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posted Date</th>
+                    <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for deal in deals %}
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{deal.title}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">{{deal.category.name}}</p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">GBP {{deal.total_earnings}}</p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-success">{{deal.status}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">{{deal.date_time_posted}}</span>
+                    </td>
+                    <td class="align-middle">
+                      {% if user == deal.user_id %}
+                      <a href="{% url 'edit-flip' flip_id=deal.id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Flip">
+                        <i class="fa fa-pen"></i>
+                      </a>
+                      {% endif %}
+                      &nbsp;
+                      <a href="{% url 'view-flip' flip_id=deal.id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="View Flip">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                      &nbsp;
+                      <a href="{{deal.deal_url}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Visit URL" target="_blank">
+                        <i class="fa fa-external-link"></i>
+                      </a>
+                      &nbsp;
+                      {% if user == deal.user_id and deal.status != 'Archived' %}
+                        {% if deal.status != 'In review' %}
+                      <a href="{% url 'archive-flip' flip_id=deal.id %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" onclick="return confirm('Are you sure you want to archive the deal')" data-original-title="Archive URL">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                      &nbsp;
+                      <a href="{% url 'refresh-flip' flip_id=deal.id return_path='home' %}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" onclick="return confirm('Are you sure you want to refresh the reaction and earnings?')" data-original-title="Refresh Data">
+                        <i class="fa fa-refresh"></i>
+                      </a>
+                        {% endif %}
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/><br/>
+      <div aria-label="..." class="pagination">
+          {% if deals.has_previous %}
+            <a class="page-link" href="?page={{deals.previous_page_number}}" tabindex="-1">Prev</a>
+          {% else %}
+            <a class="page-link disabled" href="#" tabindex="-1">Prev</a>
+          {% endif %}
+          
+          {% for i in deals.paginator.page_range %}
+            {% if deals.number == i %}
+            <a class="page-link active" href="#">{{i}} <span class="sr-only">(current)</span></a>
+            {% else %}
+            <a class="page-link" href="?page={{i}}">{{i}}</a>
+            {% endif %}
+          {% endfor %}
+
+          {% if deals.has_next %}
+          <a class="page-link" href="?page={{deals.next_page_number}}">Next</a>
+          {% else %}
+          <a class="page-link disabled" href="#">Next</a>
+          {% endif %}
+        </div>   
+        
+        {% else %}
+        <div class="row mt-4">
+          <div class="col-lg-12 mb-lg-0 mb-4">
+            <div class="card">
+              <br/><br/>
+              <div class="card-body pb-0 p-3">
+                <div class="d-flex">
+                  <h6 class="mb-2 text-center">No Data Found</h6>
+                </div>
+              </div>
+              <br/><br/>
+              </div>
+              </div>
+              </div>
+
+        {% endif %}
+        
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css-block %}
+<link href="{% static 'assets/custom/css/pagination.css' %}" rel="stylesheet" />
+<link href = "https://code.jquery.com/ui/1.13.2/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+{% endblock %}
+{% block body-block %}
+  {% include 'widgets/cards.html' %}
+    <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card ">
+            <div class="card-header pb-0 p-3">
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-2">Job Summary</h6>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Job ID</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Schedule Date</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Completed Count</th>
+                    <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">job-3</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">2023-03-20</p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-success">Completed</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">3/3</span>
+                    </td>
+                    <td class="align-middle">
+                      <!-- <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Flip">
+                        <i class="fa fa-pen"></i>
+                      </a>
+                      &nbsp; -->
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                      <a href="{% url 'job-list'%}?type=job-summary&job=job-3" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="View Details">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                      <!-- &nbsp;
+                      <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Visit URL" target="_blank">
+                        <i class="fa fa-external-link"></i>
+                      </a>
+                      &nbsp;
+                      <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" onclick="return confirm('Are you sure you want to archive the deal')" data-original-title="Archive URL">
+                        <i class="fa fa-trash"></i>
+                      </a> -->
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">job-2</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">2023-03-19</p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-warning">Partially Completed</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">3/4</span>
+                    </td>
+                    <td class="align-middle">
+                      <!-- <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Flip">
+                        <i class="fa fa-pen"></i>
+                      </a>
+                      &nbsp; -->
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                      <a href="{% url 'job-list'%}?type=job-summary&job=job-3" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="View Details">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                      <!-- &nbsp;
+                      <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Visit URL" target="_blank">
+                        <i class="fa fa-external-link"></i>
+                      </a>
+                      &nbsp;
+                      <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" onclick="return confirm('Are you sure you want to archive the deal')" data-original-title="Archive URL">
+                        <i class="fa fa-trash"></i>
+                      </a> -->
+                    </td>
+                  </tr>
+                  
+
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">job-1</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">2023-03-18</p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-success">Completed</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">2/2</span>
+                    </td>
+                    <td class="align-middle">
+                      <!-- <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Flip">
+                        <i class="fa fa-pen"></i>
+                      </a>
+                      &nbsp; -->
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                      <a href="{% url 'job-list'%}?type=job-summary&job=job-3" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="View Details">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                      <!-- &nbsp;
+                      <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Visit URL" target="_blank">
+                        <i class="fa fa-external-link"></i>
+                      </a>
+                      &nbsp;
+                      <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" onclick="return confirm('Are you sure you want to archive the deal')" data-original-title="Archive URL">
+                        <i class="fa fa-trash"></i>
+                      </a> -->
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/><br/>
+        
+{% endblock %}
+{% block js-block %}
+<script type="text/javascript">
+  $('[data-toggle="tooltip"]').tooltip();
+</script>
+<script src = "https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+{% endblock %}

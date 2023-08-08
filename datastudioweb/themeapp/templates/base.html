@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  {% block title-block %}
+  {% endblock %}
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{% static 'assets/css/argon-dashboard.css' %}" rel="stylesheet" />
+
+  <link href = "https://code.jquery.com/ui/1.13.2/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+
+  {% block css-block %}
+  {% endblock %}
+</head>
+
+<body class="g-sidenav-show   bg-gray-100">
+  <div class="min-height-400 bg-primary position-absolute w-100"></div>
+  {% include 'widgets/sidebar-nav.html' %}
+  <main class="main-content position-relative border-radius-lg ">
+    <!-- Navbar -->
+    {% include 'widgets/top-nav.html' %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+    {% block body-block %}
+    {% endblock %}
+    
+    
+    </div>
+    <br/>
+    {% include 'widgets/footer.html' %}
+  </main>
+  <!--   Core JS Files   -->
+  <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+  
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{% static 'assets/js/argon-dashboard.min.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- For autocomplete search -->
+  <script src = "https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="{% static 'assets/custom/js/nova_autocomplete.js' %}"></script>
+  {% block js-block %}
+  {% endblock %}
+</body>
+
+</html>

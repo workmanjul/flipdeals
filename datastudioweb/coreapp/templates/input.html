@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block body-block %}
+  {% include 'widgets/cards.html' %}
+    <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card ">
+            <div class="card-header pb-0 p-3">
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-2">Update Input Data</h6>
+              </div>
+            </div>
+            <div class="card-body">
+                <form class="row" action="" method="POST">
+                  {% csrf_token %}
+                  <table class="table" id="po_table">
+                    <thead>
+                    <tr>
+                      <th class="text-left col-sm-12 col-md-3">Client</th>
+                      <th class="text-left col-sm-12 col-md-5">URL</th>
+                      <th class="text-left col-sm-12 col-md-1">Day</th>
+                      <th class="text-left col-sm-12 col-md-2">AM Email</th>
+                      <th class="text-left col-sm-12 col-md-1">Type</th>
+                      <th class="text-left"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><select class="form-select" type="text" name="client_1" id="client_1" required>
+                                <option class="LibertyBallonflights">LibertyBallonflights</option>
+                                <option class="CMTDrainservices">CMTDrainservices</option>
+                                <option class="Bunker">Bunker</option>
+                                <option class="Mindfulhealthcounselling">Mindfulhealthcounselling</option>
+                              </select></td>
+                            <td><input class="form-control" type="text" name="url_1" id="url_1" required></input></td>
+                            <td><input class="form-control" type="text" name="day_1" id="day_1" required></input></td>
+                            <td><input class="form-control" type="text" name="am_email_1" id="am_email_1" required></input></td>
+                            <td><select class="form-select" type="text" name="type_1" id="type_1" required>
+                              <option class="SEO">SEO</option>
+                              <option class="PPC">PPC</option>
+                            </select></td>
+                          </tr>  
+                    </tbody>  
+                  </table>
+                  <input type="hidden" style="display: none" name="item_counter" id="item_counter" value="1"></input>
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12" z-index="0">
+                        <div class="col-sm-2">
+                            <a class="btn btn-primary rounded-4 btn-block" id="insertRow" href="#"><i class="fa fa-plus"> </i> Add</a>
+                        </div>
+                    </div>
+                    </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Update Data</button>
+                  </div>
+                </form>                              
+              </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+
+{% block js-block %}
+<script type="text/javascript">
+
+    $(function () {
+    
+    // Start counting from the third row
+    var table = document.getElementById("po_table");
+    var tbodyRowCount = table.tBodies[0].rows.length; // 3
+    var counter = tbodyRowCount;
+    
+    $("#insertRow").on("click", function (event) {
+
+        event.preventDefault();
+    
+        var newRow = $("<tr>");
+        var cols = '';
+        
+        // Increase counter after each row insertion
+        counter++;
+        // Table columns
+        $("#item_counter").val(counter);
+        cols += `<td><select class="form-select" type="text" name="client_${counter}" id="client_${counter}" required>
+                                <option class="LibertyBallonflights">LibertyBallonflights</option>
+                                <option class="CMTDrainservices">CMTDrainservices</option>
+                                <option class="Bunker">Bunker</option>
+                                <option class="Mindfulhealthcounselling">Mindfulhealthcounselling</option>
+                              </select></td>
+                            <td><input class="form-control" type="text" name="url_${counter}" id="url_${counter}" required></input></td>
+                            <td><input class="form-control" type="text" name="day_${counter}" id="day_${counter}" required></input></td>
+                            <td><input class="form-control" type="text" name="am_email_${counter}" id="am_email_${counter}" required></input></td>
+                            <td><select class="form-select" type="text" name="type_${counter}" id="type_${counter}" required>
+                              <option class="SEO">SEO</option>
+                              <option class="PPC">PPC</option>
+                            </select></td>`;
+        cols += `<td class="text-right"><a class="btn btn-sm danger" id ="deleteRow_${counter}" onclick="remove_po_item(this.id)"><i class="fa fa-remove"></i></a></td>`;
+        
+        // Insert the columns inside a row
+        newRow.append(cols);
+    
+        // Insert the row inside a table
+        $("#po_table").append(newRow);
+    
+    });
+
+    });
+
+    function remove_po_item(value){
+        var row_num = value.split("_").slice(-1)[0];
+        var counter = $("#item_counter").val();
+        $('#deleteRow_'+row_num).closest("tr").remove();
+        counter -= 1
+        $("#item_counter").val(counter);
+    }
+    </script>
+    {% endblock %}
